@@ -19,6 +19,8 @@ Vista: es la capa de presentación de la aplicación. Se encarga de mostrar los 
 
 Controlador: es la capa de control de la aplicación. Se encarga de coordinar la interacción entre el modelo y la vista, procesando las solicitudes del usuario y actualizando los datos según corresponda.
 
+La base de datos de la página está en elephantsql, mis credenciales están en el archivo db.
+
 Entre las tecnologías utilizadas se encuentran, Sequelize, cors, moment, nodemon, pg, pg-hstore, uuid, Handlebars, JSON, Express, Node JS, Javascript. Handlebars es un motor de plantillas que permite crear y renderizar HTML de forma dinámica, JSON es un formato de intercambio de datos que se utiliza para enviar y recibir información en la web, Express es un framework de Node JS que permite crear aplicaciones web y APIs de forma sencilla y rápida, Node JS es una plataforma de desarrollo que permite utilizar Javascript en el servidor. Javascript es un lenguaje de programación que se utiliza para crear interactividad en la web y Boostrap es un conjunto de clases CSS predefinidas que facilitan el diseño de interfaces web.
 
 ## ¿Qué tecnologías se usaron?
