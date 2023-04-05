@@ -4,6 +4,7 @@
 3. [Dependencias]
 4. [Github y deploy pages]
 
+### Autor: Sebastián Andrés Aguilera Madariaga
 
 ### ¿De qué trata el proyecto?
 ***
