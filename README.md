@@ -8,10 +8,17 @@
 
 ### ¿De qué trata el proyecto?
 ***
-Prueba de Certificación Talento Digital
+Prueba de Certificación Talento Digital:
+Para ejecutar el proyecto, sólo se necesita npm run dev
 
-El proyecto consiste en una página web estilo blog el cual consta con una página home de inicio donde se muestran noticias, en formato carta, en la cual se le puede dar like o dislike y comentar. Para dar like o dislike y comentar se debe logear en la página se debe autenticar el usuario utilizando el sistema de registro y login de la página que en el Navbar muestra y cuenta los Usuarios registrados. 
+```
+$ npm run dev : correr proyecto
+```
+
+El proyecto consiste en una página web estilo blog el cual consta con una página "Home" de inicio donde se muestran noticias en formato carta, en la cual se le puede dar like o dislike y comentar. Para dar like o dislike y comentar se debe logear en la página se debe autenticar el usuario utilizando el sistema de registro que encripta la contraseña con bycript y luego te redirije a la página de login para efectuar el login y se puedan utilizar las funciones de la página. En el Navbar muestra y cuenta los Usuarios registrados.
+
 Una vez logeado puedes crear posts, accediendo mediante el enlace en el navbar "Crea un post" el cual te redirige a un sistema CRUD de posteos, el cual está basado en modelos de bases de datos relacionales que consta de las tablas relacionadas Categoria.model.js, Comentario.model.js, Like.model.js, Post.model.js y Usuario.model.js. Las cuales operan mediante el ORM (Object-Relational Mapping) para Node.js que permite interactuar con bases de datos relacionales de manera más sencilla a través de código JavaScript. Sequelize permite definir modelos de datos y realizar operaciones de consulta, inserción, actualización y eliminación de registros en una base de datos relacional sin tener que escribir sentencias SQL directamente.
+
 También consta de un sistema de securización de rutas, con la función checkAuthenticate, el cual verifica el token jwt, esto evita que alguien que no haya logeado ingrese a ciertas rutas. La construcción de la página está basado en el modelo MVC (Modelo Vista Controlador) que es un patrón de arquitectura de software que se utiliza comúnmente en el desarrollo de aplicaciones web. Se basa en la separación de la aplicación en tres componentes principales:
 
 Modelo: es la capa de datos de la aplicación. Representa la estructura y lógica de los datos que maneja la aplicación y se encarga de acceder y manipular dichos datos.
@@ -48,9 +55,6 @@ bcrypt
 moment
 dotenv
 ***
-```
-$ npm run dev : correr proyecto
-```
 ## Github
 ***
 Enlace github al código de fuente: https://github.com/sebaguimad/Prueba-Certificacion-TD
