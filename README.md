@@ -57,5 +57,7 @@ dotenv
 ***
 ## Github
 ***
-Enlace github al código de fuente: https://github.com/sebaguimad/Prueba-Certificacion-TD
+Enlace github al código de fuente: https://github.com/sebaguimad/Prueba-Talento-Digital-Sebastian-Aguilera-Madariaga
+
+
 Perfil github: https://github.com/sebaguimad/
