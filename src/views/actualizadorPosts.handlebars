@@ -1,0 +1,88 @@
+<!-- Formulario para actualizar post -->
+<h3 class="text-center mt-5 mb-4">Actualizador de Posts</h3>
+<h3 class="card-title" id="post-id-title">ID del Post actualizado: </h3>
+
+<form id="formulario-post">
+  <div class="mb-3">
+    <label for="modaltitle" class="form-label">Actualiza el título del Post</label>
+    <input type="text" class="form-control" name="titulo" id="modaltitle" placeholder="Ingrese título del post" maxlength="100" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="modalcontent" class="form-label">Actualiza el contenido del Post</label>
+    <textarea class="form-control" name="contenido" id="modalcontent" rows="5" maxlength="1000" placeholder="Ingrese contenido del post" required></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="modalimagen" class="form-label">Actualiza la Imagen URL del Post</label>
+    <input type="url" class="form-control" name="imagen" id="modalimagen" placeholder="https://example.com/post-image.jpg" maxlength="200" value="https://example.com/post-image.jpg" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="modalcategoria" class="form-label">Actualiza la Categoría del Post</label>
+    <select id="modalcategoria" name="categoria" class="form-select">
+      {{#each categoria}}
+      <option value="{{categoria}}">{{nombre_categoria}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <input type="hidden" name="id_post" id="modalidpost" value="{{id_post}}">
+  <script>
+  // Función para extraer el ID del post de la URL
+  function getPostIdFromUrl() {
+    const url = new URL(window.location.href);
+    const pathSegments = url.pathname.split('/');
+    const id_post = pathSegments[pathSegments.length - 1];
+    return id_post;
+  }
+
+  // Establecer el ID del post en el campo oculto y mostrarlo en el título
+  const id_post = getPostIdFromUrl();
+  document.getElementById('modalidpost').value = id_post;
+  document.querySelector('.card-title').textContent = `ID del Post actualizado: ${id_post}`;
+  </script>
+  <!-- Botón para enviar el formulario -->
+  <div class="d-flex justify-content-center mt-3">
+    <button type="submit" class="btn btn-primary mr-2" style="margin-right: 10px;">Actualizar Post</button>
+    <a href="/" class="btn btn-danger">Cerrar el Actualizador</a>
+  </div>
+</form>
+<script>
+  document.getElementById('formulario-post').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const id_post = document.getElementById('modalidpost').value;
+  const titulo = document.getElementById('modaltitle').value;
+  const contenido = document.getElementById('modalcontent').value;
+  const imagen = document.getElementById('modalimagen').value;
+  const categoria = document.getElementById('modalcategoria').value;
+
+  try {
+    const response = await fetch(`http://localhost:3000/api/v1/posts/${id_post}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        titulo
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al actualizar el post: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    alert('Post actualizado con éxito');
+
+    // Recarga la página y redirige al mantenedor
+    window.location.href = 'http://localhost:3000/mantenedor';
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert(`Error: ${error}`);
+  }
+});
+</script>

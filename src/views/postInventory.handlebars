@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="row">
+    {{#each posts}}
+    <div class="col-md-4 col-sm-6 col-12 mb-1">
+      <div class="card mt-4" data-post-id="{{id_post}}">
+        <img src="{{imagen}}" class="card-img-top" alt="{{titulo}}">
+        <div class="card-body">
+          <h5 class="card-title">{{titulo}}</h5>
+          <p class="card-text">Autor: {{autor}}</p>
+          <p class="card-text">Contenido: {{contenido}}</p>
+          <p class="card-text">Categoría: {{categoria}}</p>
+          <p class="card-text">Actualizado: {{formatDate updatedAt}}</p>
+          {{#if isAuthenticated}}
+            <button class="btn btn-primary like-btn" data-type="like">Like</button>
+            <button class="btn btn-primary dislike-btn" data-type="dislike">Dislike</button>
+          {{else}}
+            <a href="#" class="btn btn-primary like-btn" data-type="like">Like</a>
+            <a href="#" class="btn btn-primary dislike-btn" data-type="dislike">Dislike</a>
+          {{/if}}
+          <p>Likes: <span class="num-likes">{{id_post}}</span> | Dislikes: <span class="num-dislikes">{{id_post}}</span></p>
+          
+          <div class="comentarios">
+            <ul class="list-unstyled">
+              {{#each comentarios}}
+                <li>{{texto}}</li>
+              {{/each}}
+            </ul>
+          </div>
+          
+            <form class="comentario-form">
+              <div class="form-group">
+                <label for="texto">Comentario:</label>
+                <textarea class="form-control" id="texto" rows="3" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Enviar comentario</button>
+            </form>
+
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+<script>
+  const container = document.querySelector('.container');
+  container.dataset.isAuthenticated = isAuthenticated() ? 'true' : 'false';
+</script>
+
+
+<script>
+  const likeButtons = document.querySelectorAll('.like-btn');
+  const dislikeButtons = document.querySelectorAll('.dislike-btn');
+
+  async function updateLikeDislikeCount(id_post, type) {
+    const card = document.querySelector(`.card[data-post-id="${id_post}"]`);
+    const likeCounter = card.querySelector('.num-likes');
+    const dislikeCounter = card.querySelector('.num-dislikes');
+
+    if (type === 'like') {
+      likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
+    } else {
+      dislikeCounter.textContent = parseInt(dislikeCounter.textContent) + 1;
+    }
+  }
+
+  likeButtons.forEach(button => {
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
+      const id_post = button.closest('.card').dataset.postId;
+      const type = button.dataset.type;
+      const response = await fetch('/api/v1/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id_post, type })
+      });
+      if (response.ok) {
+        alert('Like guardado correctamente');
+        updateLikeDislikeCount(id_post, type);
+      } else {
+        alert('Error al guardar el like');
+      }
+    });
+  });
+
+  dislikeButtons.forEach(button => {
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
+      const id_post = button.closest('.card').dataset.postId;
+      const type = button.dataset.type;
+      const response = await fetch('/api/v1/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id_post, type })
+      });
+      if (response.ok) {
+        alert('Dislike guardado correctamente');
+        updateLikeDislikeCount(id_post, type);
+      } else {
+        alert('Error al guardar el dislike');
+      }
+    });
+  });
+</script>
