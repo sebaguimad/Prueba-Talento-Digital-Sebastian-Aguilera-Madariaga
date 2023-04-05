@@ -12,6 +12,26 @@ export const getAllUsuarios = async (req, res) => {
   }
 };
 
+export const getUsuariosView = async (req, res) => {
+  try {
+    const usuarios = await Usuario.findAll();
+    res.render('usuarios', { usuarios });
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving users' });
+  }
+};
+
+export const countUsuarios = async (req, res) => {
+  try {
+    const count = await Usuario.count();
+    res.status(200).json({ count });
+  } catch (error) {
+    res.status(500).json({ message: 'Error counting users' });
+  }
+};
+
+
+
 export const createUsuario = async (req, res) => {
   try {
     const { nombre, email, password } = req.body;

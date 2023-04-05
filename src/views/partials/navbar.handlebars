@@ -31,6 +31,9 @@
           <li class="nav-item">
               <a href="#" class="nav-link" onclick="logout()">Cerrar sesión</a>
           </li>
+            <li class="nav-item">
+              <a href="/usuarios" class="nav-link" id="usuarios-count">Usuarios</a>
+          </li>
           </ul>
         </div>
       </div>
@@ -43,4 +46,15 @@
   // Redirige al usuario a la página principal o a la página de inicio de sesión
   window.location.href = '/';
 }
+</script>
+<script>
+  const updateUsuariosCount = async () => {
+  const response = await fetch('/api/v1/usuarios/count');
+  const data = await response.json();
+  const count = data.count;
+  const countElement = document.getElementById('usuarios-count');
+  countElement.textContent = `Usuarios (${count})`;
+};
+
+updateUsuariosCount();
 </script>
